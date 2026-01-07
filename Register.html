@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    button {
+      background: green;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<h3>Fill in the below information</h3>
+
+<input id="name" placeholder="Enter your Name">
+<input id="phone" placeholder="Enter your phone number">
+<input id="dob" type="date">
+
+<select id="address">
+  <option value="">Choose your address</option>
+  <option>Unguwar Fulani</option>
+  <option>Gidan Sarki</option>
+  <option>Gidan Soro</option>
+  <option>Unguwar Zango</option>
+  <option>Unguwar Dukawa</option>
+</select>
+
+<label>Upload your photo:</label>
+<input id="photo" type="file" accept="image/*">
+
+<button onclick="goToID()">Generate ID</button>
+
+<script>
+function goToID() {
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+  const photoInput = document.getElementById("photo");
+
+  if (!photoInput.files[0]) {
+    alert("Please upload a photo!");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function () {
+    const data = {
+      name,
+      phone,
+      address,
+      photo: reader.result
+    };
+    const encoded = encodeURIComponent(JSON.stringify(data));
+    window.location.href = "id-card.html?data=" + encoded;
+  };
+  reader.readAsDataURL(photoInput.files[0]);
+}
+</script>
+
+</body>
+</html>
