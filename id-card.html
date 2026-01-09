@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <meta charset="UTF-8">
   <title>Kausani Community ID</title>
 
@@ -36,9 +37,7 @@
       letter-spacing: 1px;
       border-bottom: 1px solid rgba(255,255,255,0.3);
       padding-bottom: 4px;
-    }
-
-    /* BODY */
+BODY */
     .id-body {
       display: flex;
       gap: 12px;
@@ -126,6 +125,7 @@
   </div>
 
   <button onclick="window.print()">Print ID Card</button>
+  <button onclick="downloadID()">Download ID as Image</button>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -139,6 +139,21 @@
       document.getElementById("id").textContent = Math.floor(100000 + Math.random() * 900000);
       document.getElementById("idPhoto").src = data.photo || data.photoUrl;
     }
+    <script>
+function downloadID() {
+  const card = document.querySelector(".id-card");
+
+  html2canvas(card, {
+    scale: 2,       // makes image clearer
+    useCORS: true
+  }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "Kausani-ID-Card.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+}
+</script>
   </script>
 
 </body>
