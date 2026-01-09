@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      height: 50px
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    button {
+      background: green;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius:2px;
+      max-width:300px;
+    }
+    h3{
+      font-family: Times new roman;
+      text-allign:center;
+      font-weight:bold;
+      margin-left:60px;
+    }
+  </style>
+</head>
+
+<script>
+function goToID() {
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value;
+  const photoInput = document.getElementById("photo");
+
+  if (!name || !phone || !address) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  if (!photoInput.files.length) {
+    alert("Please upload a photo");
+    return;
+  }
+
+  const file = photoInput.files[0];
+
+  if (!file.type.startsWith("image/")) {
+    alert("Only image files allowed");
+    return;
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert("Image must be less than 2MB");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function () {
+    sessionStorage.setItem("userData", JSON.stringify({
+      name,
+      phone,
+      address,
+      photo: reader.result
+    }));
+
+    window.location.href = "id-card.html";
+  };
+
+  reader.readAsDataURL(file);
+}
+      </script>
+<body>
+
+<h3>Fill in the below information</h3>
+
+<input id="name" placeholder="Enter your Name">
+<input id="phone" placeholder="Enter your phone number">
+<input id="dob" type="date">
+
+<select id="address">
+  <option value="">Choose your address</option>
+  <option>Kausani Hurumi</option>
+  <option>Kwanar Kausani</option>
+  <option>Kiri-Kasamma</option>
+  <option>Manga</option>
+  <option>Masama</option>
+  <option>Rege</option>
+  <option>Munchika</option>
+  <option>Kwarin Manga</option>
+  <option>Gaccin Lungu</option>
+  <option>Gaccin Titi</option>
+  <option>Turari</option>
+  <option>Gurbo</option>
+  <option>Gidan Bello</option>
+  </select>
+
+<label>Upload your photo:</label>
+<input id="photo" type="file" accept="image/*">
+
+<button onclick="goToID()">Generate ID Card</button>
+
+<script>
+function goToID() {
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+  const photoInput = document.getElementById("photo");
+
+  if (!photoInput.files[0]) {
+    alert("Please upload a photo!");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function () {
+    const data = {
+      name,
+      phone,
+      address,
+      photo: reader.result
+    };
+    const encoded = encodeURIComponent(JSON.stringify(data));
+    window.location.href = "id-card.html?data=" + encoded;
+  };
+  reader.readAsDataURL(photoInput.files[0]);
+}
+</script>
+
+</body>
+</html>
