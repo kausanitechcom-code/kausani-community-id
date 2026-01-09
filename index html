@@ -6,140 +6,71 @@
 
   <style>
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #eaeaea;
-      padding: 30px;
+      margin: 0;
+      font-family: Arial, sans-serif;
       text-align: center;
+      background-color: #f4f4f4;
     }
-
-    /* ID CARD */
-    .id-card {
-      font-family: Times New Roman;
-      width: 340px;
-      height: 210px;
-      margin: auto;
-      border-radius: 18px;
-      padding: 14px;
-      color: #fff;
-      background: blue;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .abba {
+      margin-top:20px;
+      width: 96%;
+      height: 1000px;
+      overflow: hidden;
+      border-radius:10px;
+      
     }
-
-    /* HEADER */
-    .id-header {
-      text-align: center;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-      padding-bottom: 4px;
-    }
-
-    /* BODY */
-    .id-body {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-top: 8px;
-    }
-
-    .photo {
-      width: 95px;
-      height: 125px;
-      border-radius: 12px;
+    video {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border: 2px solid #fff;
-      background: #ccc;
     }
-
-    .details {
-      text-align: left;
-      font-size: 12.5px;
-      line-height: 1.4;
+    h1 {
+      margin: 20px 10px;
+      font-family: Times new roman;
+      color:blue;
     }
-
-    .details span {
-      font-weight: 600;
-      color: #ffd700;
-    }
-
-    /* FOOTER */
-    .id-footer {
-      font-size: 10px;
-      text-align: center;
-      opacity: 0.9;
-      border-top: 1px solid rgba(255,255,255,0.3);
-      padding-top: 3px;
-    }
-
-    /* PRINT BUTTON */
-    button {
-      margin-top: 25px;
-      padding: 12px 30px;
-      background: #006400;
-      color: #fff;
-      border: none;
-      font-size: 16px;
-      border-radius: 10px;
+    a {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: green;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
       font-weight: bold;
-      cursor: pointer;
+      font-size:1cm;
     }
-
-    @media print {
-      body {
-        background: none;
-      }
-      button {
-        display: none;
-      }
-      .id-card {
-        box-shadow: none;
-      }
-    
+    .baba{
+      font-size:50px;
+    }
+        .bobo{
+    font-size:50px;
+    background-color:blue;
+    border:none;
+    border-radius:20px;
+    color:white;
+          
+        }
   </style>
 </head>
 
 <body>
+  <video class="abba" id="bgVideo" autoplay muted loop playsinline>
+  <source src="Welcome.mp4" type="video/mp4">
+</video>
 
-  <div class="id-card">
-    <div class="id-header">
-      KAUSANI COMMUNITY – OFFICIAL ID CARD (2026)
-    </div>
+<button class="bobo" onclick="enableSound()">🔊 Enable Sound</button>
 
-    <div class="id-body">
-      <img id="idPhoto" class="photo" src="" alt="Photo">
+<script>
+function enableSound() {
+  const video = document.getElementById("bgVideo");
+  video.muted = false;
+  video.play();
+}
+</script>
 
-      <div class="details">
-        <div>Name: <span id="name"></span></div>
-        <div>Phone: <span id="phone"></span></div>
-        <div>Address: <span id="address"></span></div>
-        <div>ID No: <span>KC-<span id="id"></span></span></div>
-      </div>
-    </div>
+  <h1>Click the link below and get yours</h1>
 
-    <div class="id-footer">
-      Property of Kausani Community • Unauthorized use prohibited
-    </div>
-  </div>
-
-  <button onclick="window.print()">Print ID Card</button>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const dataParam = params.get("data");
-
-    if (dataParam) {
-      const data = JSON.parse(decodeURIComponent(dataParam));
-      document.getElementById("name").textContent = data.name;
-      document.getElementById("phone").textContent = data.phone;
-      document.getElementById("address").textContent = data.address;
-      document.getElementById("id").textContent = Math.floor(100000 + Math.random() * 900000);
-      document.getElementById("idPhoto").src = data.photo || data.photoUrl;
-    }
-  </script>
-
+  <!-- CONNECTED HERE -->
+  <a href="register.html">Get Started</a>
 </body>
-</html>
+</html>    
